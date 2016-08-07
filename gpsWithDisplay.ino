@@ -117,8 +117,21 @@ void readGPS() { //This function will read and remember two NMEA sentences from 
   Serial.println(GPS.lat); //Which hemisphere N or S
 
   char bufLat[8];
-  sprintf(bufLat,"LAT : %f - %c",GPS.latitude,GPS.lat);
-  testdrawtext(bufLat,WHITE,5,35);
+  dtostrf(GPS.latitude,2,2,bufLat);
+  testdrawtext("Lat : ",WHITE,5,35);
+ 
+  testdrawtext(bufLat,WHITE,40,35);
+
+  testdrawtext("- ",WHITE,90,35);
+  
+  char latBuf[] = {GPS.lat,'\0'};
+  Serial.print("latBuf -->");
+  Serial.println(latBuf);
+  
+  testdrawtext(latBuf,WHITE,98,35);
+  
+  //sprintf(bufLat,"LAT : %l - %c",GPS.latitude,GPS.lat);
+  //estdrawtext(bufLat,WHITE,5,35);
   
   Serial.print("Longitude : ");
   Serial.print(GPS.longitude); //Write measured longitude to file
@@ -126,15 +139,32 @@ void readGPS() { //This function will read and remember two NMEA sentences from 
   Serial.println(GPS.lon); //Which Hemisphere E or W
 
   char bufLon[8];
-  sprintf(bufLon,"LON : %f - %c",GPS.longitude,GPS.lon);
-  testdrawtext(bufLon,WHITE,5,45);
+
+  dtostrf(GPS.longitude,2,2,bufLat);
+  testdrawtext("Lon : ",WHITE,5,45);
+  testdrawtext(bufLat,WHITE,40,45);
+  
+  testdrawtext("- ",WHITE,90,45);
+  
+  char lonBuf[] = {GPS.lon,'\0'};
+  Serial.print("lonBuf -->");
+  Serial.println(lonBuf);
+  
+  testdrawtext(lonBuf,WHITE,98,45);
+  
+  //sprintf(bufLon,"LON : %l - %c",12.23,GPS.lon);
+  //testdrawtext(bufLon,WHITE,5,45);
+
+  Serial.print("Buffer... For Kongitude");
+  Serial.println(bufLon);
 
     
   Serial.print("Altitude : ");
   Serial.println(GPS.altitude);
   char bufAlt[5];
-  sprintf(bufAlt,"Alti : %f ",GPS.altitude);
-  testdrawtext(bufAlt,WHITE,5,55);
+  dtostrf(GPS.altitude,2,2,bufAlt);
+  testdrawtext("Alti : ",WHITE,5,55);
+  testdrawtext(bufAlt,WHITE,45,55);
    
 
   Serial.print("Speed : ");
@@ -142,8 +172,12 @@ void readGPS() { //This function will read and remember two NMEA sentences from 
   Serial.println(" ");
   
   char bufSpeed[5];
-  sprintf(bufSpeed,"Speed : %f ",GPS.speed);
-  testdrawtext(bufSpeed,WHITE,5,65);
+  dtostrf(GPS.speed,2,2,bufSpeed);
+  testdrawtext("speed : ",WHITE,5,65);
+  testdrawtext(bufSpeed,WHITE,50,65);
+ 
+
+  testdrawtext("Kunchala Anil - anilkunchalaece@gmail.com",WHITE,0,75);
 
 
   Serial.print(GPS.hour+5);Serial.print(":");//GMT adjustment +5:30
@@ -155,7 +189,7 @@ void readGPS() { //This function will read and remember two NMEA sentences from 
   Serial.print(GPS.day);Serial.println("");
 
   char bufDateTime[20];
-  sprintf(bufDateTime,"UTC : %d:%d:%d %d/%d/%d ",GPS.hour,GPS.minute,GPS.seconds,GPS.year,GPS.month,GPS.day);
+  sprintf(bufDateTime,"UTC :%d:%d:%d %d/%d/%d ",GPS.hour,GPS.minute,GPS.seconds,GPS.year,GPS.month,GPS.day);
   //sprintf(bufDateTime,"%d:%d:%d",GPS.hour,GPS.minute,GPS.seconds);
   testdrawtext(bufDateTime,WHITE,5,15);
   
